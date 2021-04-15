@@ -74,5 +74,5 @@ pipeline {
 }
 
 def gradlew(String... args) {
-    sh "./gradlew assemble -x signArchives"
+     sh "./gradlew ${args.join(' ')} -s"
 }
