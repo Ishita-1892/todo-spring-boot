@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                gradlew('clean', 'classes')
+                gradlew('clean', 'install')
             }
         }
         stage('Unit Tests') {
@@ -56,19 +56,11 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Production') {
-            environment {
-                HEROKU_API_KEY = credentials('HEROKU_API_KEY')
-            }
-            steps {
-                unstash 'app'
-                gradlew('deployHeroku')
-            }
-        }
+        
     }
     post {
         failure {
-            mail to: 'john.doe@mycompany.com', subject: 'Build failed', body: 'Please fix!'
+            mail to: 'jishita18@gmail.com', subject: 'Build failed', body: 'Please fix!'
         }
     }
 }
